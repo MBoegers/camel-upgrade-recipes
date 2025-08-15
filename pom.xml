@@ -88,8 +88,6 @@
     </distributionManagement>
 
     <properties>
-        <!-- Place for jars of the different version, used to compile tests -->
-        <rewrite-tmp-classpath>${project.build.testOutputDirectory}/META-INF/rewrite/classpath</rewrite-tmp-classpath>
 
         <!-- Old versions of Camel required for the tests -->
         <camel3.18-version>3.18.6</camel3.18-version>
@@ -109,9 +107,9 @@
         <spring-boot-version>3.5.0</spring-boot-version>
         <springframework-version>6.2.7</springframework-version>
 
-        <rewrite-recipe-bom.version>3.9.0</rewrite-recipe-bom.version>
+        <rewrite-recipe-bom.version>3.13.0</rewrite-recipe-bom.version>
 
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
         <slf4j.version>1.7.36</slf4j.version>
 
         <!-- Http version used by the tests -->
@@ -173,7 +171,7 @@
                     <plugin>
                         <groupId>org.openrewrite.maven</groupId>
                         <artifactId>rewrite-maven-plugin</artifactId>
-                        <version>6.15.0</version>
+                        <version>6.16.0</version>
                         <configuration>
                             <activeRecipes>
                                 <recipe>org.openrewrite.recipes.rewrite.OpenRewriteRecipeBestPractices</recipe>
