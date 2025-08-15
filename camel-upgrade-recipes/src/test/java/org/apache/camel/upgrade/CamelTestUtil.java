@@ -16,16 +16,13 @@
  */
 package org.apache.camel.upgrade;
 
-import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
 
 public class CamelTestUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(CamelTestUtil.class);
@@ -82,33 +79,12 @@ public class CamelTestUtil {
     }
 
     public static Parser.Builder parserFromClasspath(CamelVersion from, String... classpath) {
-        List<String> resources = Arrays.stream(classpath).map(cl -> {
-              if (cl.startsWith("camel-")) {
-                  String maxVersion = cl + "-" + from.getVersion();
-                  //find the highest version lesser or equals the required one
-                  Path path = Paths.get("target", "test-classes", "META-INF", "rewrite", "classpath");
-                  Optional<String> dependency = Arrays.stream(path.toFile().listFiles())
-                    .filter(f -> f.getName().startsWith(cl))
-                    .map(f -> f.getName().substring(0, f.getName().lastIndexOf(".")))
-                    //filter out or higher version the requested
-                    .filter(f -> f.compareTo(maxVersion) <= 0)
-                    .sorted(Comparator.reverseOrder())
-                    .findFirst();
+        String[] resources = Arrays.stream(classpath)
+                .map(cl -> cl.startsWith("camel-") ? "%s:%s".formatted(cl, from.getVersion()) : cl)
+                .toArray(String[]::new);
 
-                  if (dependency.isEmpty()) {
-                      LOGGER.warn("Dependency not found in classpath: {}", cl);
-                  }
-
-                  return dependency.orElse(null);
-              }
-              return cl;
-          })
-          .filter(Objects::nonNull)
-          .toList();
-
-        return JavaParser.fromJavaVersion()
-          .logCompilationWarningsAndErrors(true)
-          .classpathFromResources(new InMemoryExecutionContext(), resources.toArray(new String[0]));
+        return (Parser.Builder) JavaParser.fromJavaVersion()
+                .classpath(resources)
+                .logCompilationWarningsAndErrors(true);
     }
-
 }
