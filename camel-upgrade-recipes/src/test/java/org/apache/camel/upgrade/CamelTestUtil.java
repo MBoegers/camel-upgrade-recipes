@@ -16,6 +16,7 @@
  */
 package org.apache.camel.upgrade;
 
+import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.test.RecipeSpec;
@@ -84,6 +85,7 @@ public class CamelTestUtil {
                 .toArray(String[]::new);
 
         return (Parser.Builder) JavaParser.fromJavaVersion()
+                //.classpathFromResources(new InMemoryExecutionContext(), resources)
                 .classpath(resources)
                 .logCompilationWarningsAndErrors(true);
     }
