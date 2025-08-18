@@ -131,6 +131,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.yaml</include>
+                    <include>**/classpath.tsv.zip</include>
                 </includes>
             </resource>
         </resources>

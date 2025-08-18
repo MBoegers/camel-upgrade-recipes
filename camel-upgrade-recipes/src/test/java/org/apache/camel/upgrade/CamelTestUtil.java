@@ -81,13 +81,12 @@ public class CamelTestUtil {
     }
 
     public static Parser.Builder parserFromClasspath(CamelVersion from, String... classpath) {
-        String[] resources = Arrays.stream(classpath)
-                .map(cl -> cl.startsWith("camel-") ? "%s:%s".formatted(cl, from.getVersion()) : cl)
+        String[] classpathWithVersion = Arrays.stream(classpath)
+                .map(cl -> cl.startsWith("camel-") ? "%s-%s".formatted(cl, from.getVersion()) : cl)
                 .toArray(String[]::new);
 
         return (Parser.Builder) JavaParser.fromJavaVersion()
-                //.classpathFromResources(new InMemoryExecutionContext(), resources)
-                .classpath(resources)
+                .classpathFromResources(new InMemoryExecutionContext(), classpathWithVersion)
                 .logCompilationWarningsAndErrors(true);
     }
 }
