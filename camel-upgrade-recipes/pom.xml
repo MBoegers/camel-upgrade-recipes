@@ -131,7 +131,6 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.yaml</include>
-                    <include>**/classpath.tsv.zip</include>
                 </includes>
             </resource>
         </resources>
@@ -183,15 +182,21 @@
                                 org.apache.camel:camel-spring-redis:${camel4.4-version},
                                 org.apache.camel:camel-opensearch:${camel4.4-version},
                                 org.apache.camel:camel-elasticsearch:${camel4.4-version},
+                                org.apache.camel:camel-base-engine:${camel4.4-version},
 
                                 <!-- 4.5 -->
                                 org.apache.camel:camel-elasticsearch:${camel4.5-version},
                                 org.apache.camel:camel-langchain-chat:${camel4.5-version},
                                 org.apache.camel:camel-langchain-embeddings:${camel4.5-version},
+                                org.apache.camel:camel-base-engine:${camel4.5-version},
+                                org.apache.camel:camel-opensearch:${camel4.5-version},
+                                org.apache.camel:camel-spring-redis:${camel4.5-version},
 
                                 <!-- 4.6 -->
                                 org.apache.camel:camel-http-common:${camel4.6-version},
                                 org.apache.camel:camel-undertow:${camel4.6-version},
+                                org.apache.camel:camel-base-engine:${camel4.6-version},
+                                org.apache.camel:camel-http-common:${camel4.6-version},
 
                                 <!-- 4.8 -->
                                 org.apache.camel:camel-api:${camel4.8-version},
@@ -210,10 +215,21 @@
                                 <!-- 4.10 -->
                                 org.apache.camel:camel-platform-http:${camel4.10-version},
 
+                                <!-- 4.11 -->
+                                org.apache.camel:camel-api:${camel4.11-version},
+                                org.apache.camel:camel-base:${camel4.11-version},
+                                org.apache.camel:camel-base-engine:${camel4.11-version},
+                                org.apache.camel:camel-core-model:${camel4.11-version},
+                                org.apache.camel:camel-support:${camel4.11-version},
+
                                 <!-- 4.12 -->
                                 org.apache.camel:camel-http:${camel4.12-version},
                                 org.apache.camel:camel-fury:${camel4.12-version},
                                 org.apache.camel:camel-core-model:${camel4.12-version},
+
+                                <!-- 4.13 -->
+                                org.apache.camel:camel-azure-files:${camel4.13-version},
+                                org.apache.camel:camel-base-engine:${camel4.13-version},
 
                                 <!-- Apache HTTP Client -->
                                 org.apache.httpcomponents:httpclient:${http-client.version},

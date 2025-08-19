@@ -82,7 +82,7 @@ public class CamelTestUtil {
 
     public static Parser.Builder parserFromClasspath(CamelVersion from, String... classpath) {
         String[] classpathWithVersion = Arrays.stream(classpath)
-                .map(cl -> cl.startsWith("camel-") ? "%s-%s".formatted(cl, from.getVersion()) : cl)
+                .map(cl -> cl.startsWith("camel-") ? "%s-%s".formatted(cl, from.getMajorMinor()) : cl)
                 .toArray(String[]::new);
 
         return (Parser.Builder) JavaParser.fromJavaVersion()
